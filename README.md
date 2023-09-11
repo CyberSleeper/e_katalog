@@ -10,6 +10,8 @@ This is my 2nd weekly assignment for Platform Based Programming lecture.
 - [Why do we use virtual environment?](#third)
 - [What is MVC, MVT, MVVM and what is the difference?](#fourth)
 
+---
+
 ## <a id="first">How did I develop this app?</a>
 
 <details>
@@ -116,7 +118,7 @@ This is my 2nd weekly assignment for Platform Based Programming lecture.
 </details>
 
 <details>
-<summary>Deploy the app to Adaptable.io</summary>
+<summary>Deploy the project to Adaptable.io</summary>
 
 1. Create or login to Adaptable account.
 2. Create new app by connect to an existing repository, and choose the repository to deploy.
@@ -131,8 +133,39 @@ This is my 2nd weekly assignment for Platform Based Programming lecture.
 
 </details>
 
-## <a id="second">What is the relation between `urls.py`, `views.py`, `models.py`, and `html`?</a>
+---
+
+## <a id="second">What is the relation between `urls.py`, `views.py`, `models.py`, and `html` file?</a>
+
+![MTV Django Architecture](https://hackmd.io/_uploads/S1uSXQsC3.png)
+
+Django uses the "MTV Architecture":
+- M stands for "Model" which represents the data logic of the app;
+- T stands for "Template" which is responsible for representing the data to the user;
+- V stands for "View" who manages the flow of data between our models and templates. It also handles user requests,
+
+---
 
 ## <a id="third">Why do we use virtual environment?</a>
 
+We use Virtual Environment to restrict our Django project from interfering our other project. Normally we'd have multiple projects in one system and each project will have different package version. To prevent the version conflict, we need virtual environment to keep each package in place.
+
+---
+
 ## <a id="fourth">What is MVC, MVT, MVVM and what is the difference?</a>
+
+### MVC (Model-View-Controller)
+
+In MVC, we split the code into 3 components where each components has its own specific purposes.
+
+- Model: manages data logic of the app.
+- View: manages how the data will be displayed.
+- Controller: making the bridge between model and view to by manipulating the models and render the views..
+
+### MVT (Model-View-Template)
+
+MVT is similar to MVC. The main difference is that the "controller" part is taken care by the framework itself. Templates are basically the HTML code that render the data.
+
+### MVVM (Model-View-ViewModel)
+
+MVVM uses "ViewModel" which is basically the abstraction of view which wraps the model data. ViewModel is a model that changes to a view according to the command that affects it.
