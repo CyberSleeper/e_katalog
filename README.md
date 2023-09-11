@@ -137,7 +137,7 @@ This is my 2nd weekly assignment for Platform Based Programming lecture.
 
 ## <a id="second">What is the relation between `urls.py`, `views.py`, `models.py`, and `html` file?</a>
 
-![MTV Django Architecture](https://hackmd.io/_uploads/S1uSXQsC3.png)
+![MTV Django Architecture](https://github.com/CyberSleeper/e_katalog/blob/main/MVT%20Django%20Architecture.png)
 
 Django uses the "MTV Architecture":
 - M stands for "Model" which represents the data logic of the app;
