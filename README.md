@@ -1,18 +1,24 @@
 # Cyber Katalog
 
-https://cyberkatalog.adaptable.app/main
+https://cyberkatalog.adaptable.app/main 
 
-This is my 2nd weekly assignment for Platform Based Programming lecture.
+This is my weekly assignment for Platform Based Programming lecture.
 
-## Scope
-- [How did I develop this app?](#first)
-- [What is the relation between Django files?](#second)
-- [Why do we use virtual environment?](#third)
-- [What is MVC, MVT, MVVM and what is the difference?](#fourth)
+### Jump to
+- [Week 02](#week-02)
+- [Week 03](#week-03)
+
+## Week 02
+
+### Scope
+- [How did I develop this app?](#how-did-i-develop-this-app)
+- [What is the relation between Django files?](#what-is-the-relation-between-urlspy-viewspy-modelspy-and-html-file)
+- [Why do we use virtual environment?](#why-do-we-use-virtual-environment)
+- [What is MVC, MVT, MVVM and what is the difference?](#what-is-mvc-mvt-mvvm-and-what-is-the-difference)
 
 ---
 
-## <a id="first">How did I develop this app?</a>
+### How did I develop this app?
 
 <details>
 <summary >Initiate a new Django project in local directory</summary>
@@ -135,9 +141,9 @@ This is my 2nd weekly assignment for Platform Based Programming lecture.
 
 ---
 
-## <a id="second">What is the relation between `urls.py`, `views.py`, `models.py`, and `html` file?</a>
+### What is the relation between `urls.py`, `views.py`, `models.py`, and `html` file?
 
-![MTV Django Architecture](https://github.com/CyberSleeper/e_katalog/blob/main/MVT%20Django%20Architecture.png)
+![MTV Django Architecture](https://github.com/CyberSleeper/e_katalog/blob/main/media/MVTDjangoArchitecture.png)
 
 Django uses the "MTV Architecture":
 - M stands for "Model" which represents the data logic of the app;
@@ -146,15 +152,15 @@ Django uses the "MTV Architecture":
 
 ---
 
-## <a id="third">Why do we use virtual environment?</a>
+### Why do we use virtual environment?
 
 We use Virtual Environment to restrict our Django project from interfering our other project. Normally we'd have multiple projects in one system and each project will have different package version. To prevent the version conflict, we need virtual environment to keep each package in place.
 
 ---
 
-## <a id="fourth">What is MVC, MVT, MVVM and what is the difference?</a>
+### What is MVC, MVT, MVVM and what is the difference?
 
-### MVC (Model-View-Controller)
+#### MVC (Model-View-Controller)
 
 In MVC, we split the code into 3 components where each components has its own specific purposes.
 
@@ -162,10 +168,78 @@ In MVC, we split the code into 3 components where each components has its own sp
 - View: manages how the data will be displayed.
 - Controller: making the bridge between model and view to by manipulating the models and render the views..
 
-### MVT (Model-View-Template)
+#### MVT (Model-View-Template)
 
 MVT is similar to MVC. The main difference is that the "controller" part is taken care by the framework itself. Templates are basically the HTML code that render the data.
 
-### MVVM (Model-View-ViewModel)
+#### MVVM (Model-View-ViewModel)
 
 MVVM uses "ViewModel" which is basically the abstraction of view which wraps the model data. ViewModel is a model that changes to a view according to the command that affects it.
+
+## Week 03
+
+### Scope
+- [What is the difference between `POST` form and `GET` form in Django?](#what-is-the-difference-between-form-post-and-get-in-django)
+- [What are the main differences between XML, JSON, and HTML in the context of data delivery?](#what-are-the-main-differences-between-xml-json-and-html-in-the-context-of-data-delivery)
+- [Why is JSON often used in data exchange between modern web applications?](#why-is-json-often-used-in-data-exchange-between-modern-web-applications)
+
+
+### What is the difference between `POST` form and `GET` form in Django?
+
+The main difference is `POST` form encrypt the form data and send it to server without exposing the data as URL parameter. Meanwhile `GET` form does not encrypt the data and bundles the submitted data as URL parameter
+
+![POST form](https://github.com/CyberSleeper/e_katalog/blob/main/media/POSTForm.png)
+
+![GET form](https://github.com/CyberSleeper/e_katalog/blob/main/media/GETForm.png)
+
+
+### What are the main differences between XML, JSON, and HTML in the context of data delivery?
+
+HTML and XML are fairly similar. But they have different purposes. The purpose of XML is organization while the purpose of HTML is presentation. XML does not have pre-defined tags. Therefore we can define our own tags as we like and organize our data with flexibility. Whereas HTML is full of pre-defined tags. Hence, the common case is use HTML to present our data and web structure while XML stores our data in an organized manner.
+
+Same as XML, JSON is used to store and organize our data. The difference is their formatting. JSON enclose their data using curly brackets while XML use HTML-like tags.
+
+XML
+```xml
+<root>
+	<pilot>
+		<fruit>apple</fruit>
+		<amount>3</amount>
+	</pilot>
+	<pilot>
+		<fruit>longan</fruit>
+		<amount>9</amount>
+	</pilot>
+	<pilot>
+		<fruit>durian</fruit>
+		<amount />
+	</pilot>
+</root>
+```
+
+JSON
+```json
+{
+    "pilot": [
+        {
+            "fruit": "apple",
+            "amount": 3
+        },
+        {
+            "fruit": "longan",
+            "amount": 9
+        },
+        {
+            "fruit": "durian",
+            "amount": null
+        }
+    ]
+}
+```
+
+
+### Why is JSON often used in data exchange between modern web applications?
+
+Most of the time XML is considered inferior because it is relatively hard to maintain the opening and closing tags. JSON is more preferred because of its conciseness and compactness making it faster to parse and generate.
+
+### Explain how you implemented the checklist above step-by-step
