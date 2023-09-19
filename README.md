@@ -179,17 +179,19 @@ MVVM uses "ViewModel" which is basically the abstraction of view which wraps the
 ## Week 03
 
 ### Scope
-- [What is the difference between `POST` form and `GET` form in Django?](#what-is-the-difference-between-form-post-and-get-in-django)
+- [What is the difference between POST form and GET form in Django?](#what-is-the-difference-between-post-form-and-get-form-in-django)
 - [What are the main differences between XML, JSON, and HTML in the context of data delivery?](#what-are-the-main-differences-between-xml-json-and-html-in-the-context-of-data-delivery)
 - [Why is JSON often used in data exchange between modern web applications?](#why-is-json-often-used-in-data-exchange-between-modern-web-applications)
+- [Explain how you implemented week 02 assignment step-by-step](#explain-how-you-implemented-week-02-assignment-step-by-step)
 
+### What is the difference between POST form and GET form in Django?
 
-### What is the difference between `POST` form and `GET` form in Django?
+The main difference is `POST` form encrypt the form data and send it to server without exposing the data as URL parameter. Meanwhile `GET` form does not encrypt the data and bundles the submitted data as URL parameter. 
 
-The main difference is `POST` form encrypt the form data and send it to server without exposing the data as URL parameter. Meanwhile `GET` form does not encrypt the data and bundles the submitted data as URL parameter
-
+POST form
 ![POST form](https://github.com/CyberSleeper/e_katalog/blob/main/media/POSTForm.png)
 
+GET form
 ![GET form](https://github.com/CyberSleeper/e_katalog/blob/main/media/GETForm.png)
 
 
@@ -214,6 +216,7 @@ XML
 		<fruit>durian</fruit>
 		<amount />
 	</pilot>
+	<required>10</required>
 </root>
 ```
 
@@ -233,7 +236,8 @@ JSON
             "fruit": "durian",
             "amount": null
         }
-    ]
+    ],
+    "required": 10
 }
 ```
 
@@ -242,4 +246,43 @@ JSON
 
 Most of the time XML is considered inferior because it is relatively hard to maintain the opening and closing tags. JSON is more preferred because of its conciseness and compactness making it faster to parse and generate.
 
-### Explain how you implemented the checklist above step-by-step
+### Explain how you implemented week 02 assignment step-by-step
+
+1. Create a `form` input to add a model object to the previous app. 
+
+    - Create a new file named `forms.py` in `main` directory. We will create the form structure in this file.
+
+        ```python
+        from django.forms import ModelForm
+        from main.models import Item
+
+        class ItemForm(ModelForm):
+        class Meta:
+            model = Item
+            fields = ["name", "amount", "description"]
+        ```
+
+2. Add 5 `views` to view the added objects in HTML, XML, JSON, XML by ID, and JSON by ID formats.
+
+    - Update `main/views.py` and add the required function
+
+3. Create URL routing for each of the views.
+
+    - Update the `main/urls.py` and add the routes based on our `views.py`.
+
+### Result of hitting the endpoint using Thunder Client (Postman-like)
+
+- HTML
+![HTML](https://github.com/CyberSleeper/e_katalog/blob/main/media/HTML.png)
+
+- JSON
+![JSON](https://github.com/CyberSleeper/e_katalog/blob/main/media/JSON.png)
+
+- JSON_by_id
+![JSON_by_id](https://github.com/CyberSleeper/e_katalog/blob/main/media/JSON_by_id.png)
+
+- XML
+![XML](https://github.com/CyberSleeper/e_katalog/blob/main/media/XML.png)
+
+- XML_by_id
+![XML_by_id](https://github.com/CyberSleeper/e_katalog/blob/main/media/XML_by_id.png)
