@@ -1,8 +1,36 @@
-<h1>CYBER-KATALOG</h1>
-<br>
-<h5>{{ nama_mahasiswa }}</h5>
-<h5>{{ kelas_mahasiswa }}</h5>
-<br>
-<h3>{{ name }}</h3>
-<h5>Tersisa: {{ amount }}</h5>
-<p>{{ description }}</p>
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>CYBER-KATALOG</h1>
+  <br>
+  <h5>{{ nama_mahasiswa }}</h5>
+  <h5>{{ kelas_mahasiswa }}</h5>
+  <br>
+  <h3>{{ name }}</h3>
+  <h5>Tersisa: {{ amount }}</h5>
+  <p>{{ description }}</p>
+  <br/>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Tersisa</th>
+      <th>Description</th>
+      <th>Time Added</th>
+    </tr>
+
+    {% for item in items %}
+      <tr>
+        <td>{{item.name}}</td>
+        <td>{{item.amount}}</td>
+        <td>{{item.description}}</td>
+        <td>{{item.created_at}}</td>
+      </tr>
+    {% endfor %}
+  </table>
+  <br/>
+  <a href="{% url 'main:create_item' %}">
+    <button>
+        Add New Item
+    </button>
+</a>
+{% endblock content %}

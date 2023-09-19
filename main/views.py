@@ -1,12 +1,46 @@
 from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from main.forms import ItemForm
+from django.urls import reverse
+from main.models import Item
+from django.core import serializers
 
-def show_product(request):
+def show_main(request):
+  items = Item.objects.all()
+
   context = {
     'nama_mahasiswa': 'Mahartha Gemilang',
     'kelas_mahasiswa': 'PBP D',
     'name': 'Cheese Sauce',
     'amount': '127',
-    'description': 'A product made of sauce'
+    'description': 'A product made of sauce',
+    'items': items
   }
 
   return render(request, 'main.html', context)
+
+def create_item(request):
+  form = ItemForm(request.POST or None)
+
+  if form.is_valid() and request.method == "POST":
+    form.save()
+    return HttpResponse("Nice")
+  
+  context = {'form': form}
+  return render(request, 'create_item.html', context)
+
+def show_xml(request):
+  data = Item.objects.all()
+  return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+def show_xml_by_id(request):
+  data = Item.objects.filter(pk=id)
+  return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+def show_json(request):
+  data = Item.objects.all()
+  return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+def show_json_by_id(request):
+  data = Item.objects.filter(pk=id)
+  return HttpResponse(serializers.serialize("json", data), content_type="application/json")
