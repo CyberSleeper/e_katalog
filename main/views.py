@@ -7,6 +7,7 @@ from django.core import serializers
 
 def show_main(request):
   items = Item.objects.all()
+  count = Item.objects.all().count()
 
   context = {
     'nama_mahasiswa': 'Mahartha Gemilang',
@@ -14,6 +15,7 @@ def show_main(request):
     'name': 'Cheese Sauce',
     'amount': '127',
     'description': 'A product made of sauce',
+    'count': count,
     'items': items
   }
 
@@ -24,7 +26,7 @@ def create_item(request):
 
   if form.is_valid() and request.method == "POST":
     form.save()
-    return HttpResponse("Nice")
+    return HttpResponseRedirect(reverse('main:show_main'))
   
   context = {'form': form}
   return render(request, 'create_item.html', context)
