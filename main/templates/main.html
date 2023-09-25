@@ -37,5 +37,12 @@
     <button>
         Add New Item
     </button>
-</a>
+  </a>
+  <h5>Nama pengguna: {{ current_user }}</h5>
+  <h5>Sesi terakhir login: {{ last_login }}</h5>
+  <a href="{% url 'main:logout' %}">
+    <button>
+        Logout
+    </button>
+  </a>
 {% endblock content %}
