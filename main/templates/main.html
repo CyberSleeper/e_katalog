@@ -29,6 +29,23 @@
         <td>{{item.amount}}</td>
         <td>{{item.description}}</td>
         <td>{{item.created_at}}</td>
+        <td>
+          <a href="{% url 'main:increment_counter' item.id %}">
+            <button>
+              ++
+            </button>
+          </a>
+          <a href="{% url 'main:decrement_counter' item.id %}">
+            <button>
+              --
+            </button>
+          </a>
+          <a href="{% url 'main:delete_item' item.id %}"">
+            <button>
+              delete
+            </button>
+          </a>
+        </td>
       </tr>
     {% endfor %}
   </table>
