@@ -8,6 +8,7 @@ This is my weekly assignment for Platform Based Programming lecture.
 - [Week 02](#week-02)
 - [Week 03](#week-03)
 
+
 ## Week 02
 
 ### Scope
@@ -182,7 +183,7 @@ MVVM uses "ViewModel" which is basically the abstraction of view which wraps the
 - [What is the difference between POST form and GET form in Django?](#what-is-the-difference-between-post-form-and-get-form-in-django)
 - [What are the main differences between XML, JSON, and HTML in the context of data delivery?](#what-are-the-main-differences-between-xml-json-and-html-in-the-context-of-data-delivery)
 - [Why is JSON often used in data exchange between modern web applications?](#why-is-json-often-used-in-data-exchange-between-modern-web-applications)
-- [Explain how you implemented week 02 assignment step-by-step](#explain-how-you-implemented-week-02-assignment-step-by-step)
+- [Explain how you implemented week 03 assignment step-by-step](#explain-how-you-implemented-week-03-assignment-step-by-step)
 
 ### What is the difference between POST form and GET form in Django?
 
@@ -246,7 +247,7 @@ JSON
 
 Most of the time XML is considered inferior because it is relatively hard to maintain the opening and closing tags. JSON is more preferred because of its conciseness and compactness making it faster to parse and generate.
 
-### Explain how you implemented week 02 assignment step-by-step
+### Explain how you implemented week 03 assignment step-by-step
 
 1. Create a `form` input to add a model object to the previous app. 
 
@@ -286,3 +287,38 @@ Most of the time XML is considered inferior because it is relatively hard to mai
 
 - XML_by_id
 ![XML_by_id](https://github.com/CyberSleeper/e_katalog/blob/main/media/XML_by_id.png)
+
+
+
+## Week 04
+
+### Scope
+
+- [What is UserCreationForm in Django?](#what-is-usercreationform-in-django)
+- [What is the difference between authentication and authorization in Django application? Why are both important?](#what-is-the-difference-between-authentication-and-authorization-in-django-application-why-are-both-important)
+- [What are cookies in website? How does Django use cookies to manage user session data?](#what-are-cookies-in-website-how-does-django-use-cookies-to-manage-user-session-data)
+- [Are cookies secure to use? Is there potential risk to be aware of?](#are-cookies-secure-to-use-is-there-potential-risk-to-be-aware-of)
+- [Explain how you implemented week 04 assignment step-by-step](#explain-how-you-implemented-week-04-assignment-step-by-step)
+
+### What is UserCreationForm in Django?
+
+Django `UserCreationForm` is a class in Django that handle account registration. It has some predefined validation that could simplify our form making. By default, the form fields consist of username and password. It may simplify the form making and shorten the development time, but the down side is it is lack of customization. 
+
+### What is the difference between authentication and authorization in Django application? Why are both important?
+
+Authentication is about verifying the user's identity. While authorization is about determining if the user has the right to access the respective page. Both are important for the sake of layered security.
+
+### What are cookies in website? How does Django use cookies to manage user session data?
+
+Cookies are pieces of data stored in user's web browser. The examples of data stored as cookie are user's session, personalization, and tracking user's behavior. In Django, we could use cookies to manage user session data by using `set_cookie` and set the session id in the cookies.
+
+### Are cookies secure to use? Is there potential risk to be aware of?
+
+In terms of cookiesm, there is a common term called "session hijacking". Session hijacking happened when hijackers steal or manipulate session cookies and act as the respective user. There are many ways to prevent it.
+
+### Explain how you implemented week 04 assignment step-by-step
+
+1. Create the registration form.
+2. Create login and logout pages with its logic.
+3. Integrate our data with cookies.
+4. Add authorization to restrict user's access.
