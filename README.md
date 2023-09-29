@@ -8,6 +8,7 @@ This is my weekly assignment for Platform Based Programming lecture.
 - [Week 02](#week-02)
 - [Week 03](#week-03)
 - [Week 04](#week-04)
+- [Week 05](#week-05)
 
 ## Week 02
 
@@ -322,3 +323,34 @@ In terms of cookiesm, there is a common term called "session hijacking". Session
 2. Create login and logout pages with its logic.
 3. Integrate our data with cookies.
 4. Add authorization to restrict user's access.
+
+
+## Week 05
+
+### Scope
+
+- [What are the benefits of CSS element selector and when to use it?](#what-is-the-benefit-of-css-element-selector-and-when-to-use-it)
+- [Explain some of HTML5 tags](#explain-some-of-html5-tags)
+- [What are the differences between margin and padding?](#what-are-the-differences-between-margin-and-padding)
+- [What are the differences between Tailwind and Bootstrap? When should we use Bootstrap and when should we use Tailwind?](#what-are-the-differences-between-tailwind-and-bootstrap-when-should-we-use-bootstrap-and-when-should-we-use-tailwind)
+
+#### What is the benefit of CSS element selector and when to use it?
+
+CSS element selector typically used when we want to style a specific element. The benefit is we could apply our style to all selected elements easily rather than applying inline to each element.
+
+#### Explain some of HTML5 tags
+- `<button>` to create a button in HTML.
+- `<div>` to define a section in HTML.
+- `<table>` to create a table in HTML.
+- `<ol>` to create an ordered list in HTML.
+- `<ul>` to create an unordered list in HTML.
+
+#### What are the differences between margin and padding?
+
+![Layout](https://github.com/CyberSleeper/e_katalog/blob/main/media/layout.png)
+
+By definition, margin is the space between border and elements outside while padding is the space between border and the elements inside.
+
+#### What are the differences between Tailwind and Bootstrap? When should we use Bootstrap and when should we use Tailwind?
+
+Bootstrap has been available since a long time ago while, but in most cases Tailwind is more prefered that Bootstrap. It is because Tailwind's utility are more customizable with greater styling flexibility. Bootstrap is better when we want to use prebuilt UI components and themes.
