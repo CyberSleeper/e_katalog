@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<style>
+  tr:last-child {
+    background: rgb(250, 194, 194);
+  }
+</style>
+
   <h1 class="text-2xl font-bold">CYBER-KATALOG</h1>
   <br>
   <h5>{{ nama_mahasiswa }}</h5>
@@ -16,13 +23,13 @@
   </h2>
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full">
-      <thead class="bg-gray-300">
+      <tr class="bg-gray-300">
         <th class="px-6 py-3">Name</th>
         <th class="px-6 py-3">Tersisa</th>
         <th class="px-6 py-3">Description</th>
         <th class="px-6 py-3">Time Added</th>
         <th class="px-6 py-3">Feature</th>
-      </thead>
+      </tr>
 
       {% for item in items %}
         <tr class="bg-white hover:bg-gray-200">
@@ -30,19 +37,19 @@
           <td class="px-6 py-3">{{item.amount}}</td>
           <td class="px-6 py-3">{{item.description}}</td>
           <td class="px-6 py-3">{{item.created_at}}</td>
-          <td class="px-6 py-3">
+          <td class="px-6 py-3 flex gap-4">
             <a href="{% url 'main:increment_counter' item.id %}">
-              <button>
+              <button class="bg-gray-300 px-1 hover:bg-gray-400 transition-all duration-200 mt-2 mb-5">
                 ++
               </button>
             </a>
             <a href="{% url 'main:decrement_counter' item.id %}">
-              <button>
+              <button class="bg-gray-300 px-1 hover:bg-gray-400 transition-all duration-200 mt-2 mb-5">
                 --
               </button>
             </a>
             <a href="{% url 'main:delete_item' item.id %}"">
-              <button>
+              <button class="bg-gray-300 px-1 hover:bg-gray-400 transition-all duration-200 mt-2 mb-5">
                 delete
               </button>
             </a>
