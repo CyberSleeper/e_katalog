@@ -7,12 +7,15 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
+    <script src="https://cdn.tailwindcss.com"></script>
     {% block meta %}
     {% endblock meta %}
   </head>
 
   <body>
-    {% block content %}
-    {% endblock content %}
+    <div class="mx-8 my-4">
+      {% block content %}
+      {% endblock content %}
+    </div>
   </body>
 </html>
