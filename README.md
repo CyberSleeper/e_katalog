@@ -334,23 +334,23 @@ In terms of cookiesm, there is a common term called "session hijacking". Session
 - [What are the differences between margin and padding?](#what-are-the-differences-between-margin-and-padding)
 - [What are the differences between Tailwind and Bootstrap? When should we use Bootstrap and when should we use Tailwind?](#what-are-the-differences-between-tailwind-and-bootstrap-when-should-we-use-bootstrap-and-when-should-we-use-tailwind)
 
-#### What is the benefit of CSS element selector and when to use it?
+### What is the benefit of CSS element selector and when to use it?
 
 CSS element selector typically used when we want to style a specific element. The benefit is we could apply our style to all selected elements easily rather than applying inline to each element.
 
-#### Explain some of HTML5 tags
+### Explain some of HTML5 tags
 - `<button>` to create a button in HTML.
 - `<div>` to define a section in HTML.
 - `<table>` to create a table in HTML.
 - `<ol>` to create an ordered list in HTML.
 - `<ul>` to create an unordered list in HTML.
 
-#### What are the differences between margin and padding?
+### What are the differences between margin and padding?
 
 ![Layout](https://github.com/CyberSleeper/e_katalog/blob/main/media/layout.png)
 
 By definition, margin is the space between border and elements outside while padding is the space between border and the elements inside.
 
-#### What are the differences between Tailwind and Bootstrap? When should we use Bootstrap and when should we use Tailwind?
+### What are the differences between Tailwind and Bootstrap? When should we use Bootstrap and when should we use Tailwind?
 
 Bootstrap has been available since a long time ago while, but in most cases Tailwind is more prefered that Bootstrap. It is because Tailwind's utility are more customizable with greater styling flexibility. Bootstrap is better when we want to use prebuilt UI components and themes.
