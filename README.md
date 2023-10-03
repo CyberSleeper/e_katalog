@@ -329,12 +329,13 @@ In terms of cookiesm, there is a common term called "session hijacking". Session
 
 ### Scope
 
-- [What are the benefits of CSS element selector and when to use it?](#what-is-the-benefit-of-css-element-selector-and-when-to-use-it)
+- [What are the benefits of CSS element selector and when to use it?](#what-are-the-benefits-of-css-element-selector-and-when-to-use-it)
 - [Explain some of HTML5 tags](#explain-some-of-html5-tags)
 - [What are the differences between margin and padding?](#what-are-the-differences-between-margin-and-padding)
 - [What are the differences between Tailwind and Bootstrap? When should we use Bootstrap and when should we use Tailwind?](#what-are-the-differences-between-tailwind-and-bootstrap-when-should-we-use-bootstrap-and-when-should-we-use-tailwind)
+- [Explain how you implemented week 05 assignment step-by-step](#explain-how-you-implemented-week-05-assignment-step-by-step)
 
-### What is the benefit of CSS element selector and when to use it?
+### What are the benefits of CSS element selector and when to use it?
 
 CSS element selector typically used when we want to style a specific element. The benefit is we could apply our style to all selected elements easily rather than applying inline to each element.
 
@@ -354,3 +355,16 @@ By definition, margin is the space between border and elements outside while pad
 ### What are the differences between Tailwind and Bootstrap? When should we use Bootstrap and when should we use Tailwind?
 
 Bootstrap has been available since a long time ago while, but in most cases Tailwind is more prefered that Bootstrap. It is because Tailwind's utility are more customizable with greater styling flexibility. Bootstrap is better when we want to use prebuilt UI components and themes.
+
+### Explain how you implemented week 05 assignment step-by-step
+
+1. Add Tailwind by using cdn script on `base.html`.
+2. Style our pages using Tailwind.
+3. For the sake of bonus assignment, implement different color on the last row of our table. Add below code on our `main.html`.
+    ```html
+    <style>
+    tr:last-child {
+        background: rgb(250, 194, 194);
+    }
+    </style>
+    ```
