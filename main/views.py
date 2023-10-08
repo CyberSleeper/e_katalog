@@ -5,9 +5,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.core import serializers
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 
 from main.forms import ItemForm
 from main.models import Item
@@ -108,3 +109,22 @@ def delete_item(request, id):
   item = (Item.objects.get(id=id))
   item.delete()
   return redirect('main:show_main')
+
+def get_item_json(request):
+  items = Item.objects.all()
+  return HttpResponse(serializers.serialize('json', items))
+
+@csrf_exempt
+def add_item_ajax(request):
+  if request.method == 'POST':
+    name = request.POST.get("name")
+    amount = request.POST.get("amount")
+    description = request.POST.get("description")
+    user = request.user
+
+    new_item = Item(name=name, amount=amount, description=description, user=user)
+    new_item.save()
+
+    return HttpResponse(b"CREATED", STATUS=201)
+  
+  return HttpResponseNotFound()
