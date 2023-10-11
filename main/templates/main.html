@@ -21,9 +21,29 @@
   <h2 class="text-lg text-bold">
     Total items: {{ count }}
   </h2>
-  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table id='item_table' class="w-full table table-bordered">
-    </table>
+  <div id="cards" class="row">
+    <!-- Use AJAX -->
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">${item.fields.name}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Tersisa ${item.fields.amount}</h6>
+        <p class="card-text">${item.fields.description}</p>
+        <p class="card-text">${item.fields.created_at}</p>
+        <a href="\{% url 'main:increment_counter' ${item.fields.id} %\}">
+          <button class="bg-gray-300 px-1 hover:bg-gray-400 transition-all duration-200 mt-2 mb-5">
+            ++
+          </button>
+        </a>
+        <a href="\{% url 'main:decrement_counter' ${item.fields.id} %\}">
+          <button class="bg-gray-300 px-1 hover:bg-gray-400 transition-all duration-200 mt-2 mb-5">
+            --
+          </button>
+        </a>
+        <button class="delete-button">
+          delete
+        </button>
+      </div>
+    </div>
   </div>
 
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -73,50 +93,39 @@
     }
     
     async function refreshItems() {
-      document.getElementById("item_table").innerHTML = ""
+      document.getElementById("cards").innerHTML = ""
       const items = await getItems()
       console.log("first")
-      let htmlString = `<thead class='thead-dark'>
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Tersisa</th>
-          <th scope="col">Description</th>
-          <th scope="col">Time Added</th>
-          <th scope="col">Feature</th>
-        </tr>
-      </thead>`
+      let htmlString = ``
       items.forEach((item) => {
-        htmlString += `\n<tr">
-          <td>${item.fields.name}</td>
-          <td>${item.fields.amount}</td>
-          <td>${item.fields.description}</td>
-          <td>${item.fields.created_at}</td>
-          <td class="px-6 py-3 flex gap-4">
-            <a href="\{% url 'main:increment_counter' item.id %\}">
+        htmlString += `\n<div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">${item.fields.name}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Tersisa ${item.fields.amount}</h6>
+            <p class="card-text">${item.fields.description}</p>
+            <p class="card-text">${item.fields.created_at}</p>
+            <a href="\{% url 'main:increment_counter' ${item.fields.id} %\}">
               <button class="bg-gray-300 px-1 hover:bg-gray-400 transition-all duration-200 mt-2 mb-5">
                 ++
               </button>
             </a>
-            <a href="\{% url 'main:decrement_counter' item.id %\}">
+            <a href="\{% url 'main:decrement_counter' ${item.fields.id} %\}">
               <button class="bg-gray-300 px-1 hover:bg-gray-400 transition-all duration-200 mt-2 mb-5">
                 --
               </button>
             </a>
-            <a href="\{% url 'main:delete_item' item.id %\}"">
-              <button class="bg-gray-300 px-1 hover:bg-gray-400 transition-all duration-200 mt-2 mb-5">
-                delete
-              </button>
-            </a>
-          </td>
-        </tr>`
+            <button class="delete-button bg-gray-300 px-1 hover:bg-gray-400 transition-all duration-200 mt-2 mb-5">
+              delete
+            </button>
+          </div>
+        </div>`
       })
 
-      document.getElementById("item_table").innerHTML = htmlString
+      document.getElementById("cards").innerHTML = htmlString
     }
     refreshItems()
 
     function addItem() {
-      console.log("Sec")
       fetch("{% url 'main:add_item_ajax' %}", {
         method: "POST",
         body: new FormData(document.querySelector('#form'))
@@ -125,8 +134,22 @@
       document.getElementById("form").reset()
       return false
     }
+    console.log(document)
 
+    document.addEventListener('DOMContentLoaded', function () {
+      const deleteButtons = document.querySelectorAll('.delete-button');
+      console.log(deleteButtons)
+      deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          console.log("CLICKED")
+          const id = this.getAttribute('data-item-id')
+          console.log(id)
+          fetch(`/delete_item_ajax/${id}`).then(refreshItems)
+        })
+      })
+    })
     document.getElementById("button_add").onclick = addItem
+    document.getElementById("button_delete").onclick = deleteItem
 
   </script>
 {% endblock content %}

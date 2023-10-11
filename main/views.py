@@ -106,7 +106,7 @@ def decrement_counter(request, id):
   return redirect('main:show_main')
 
 def delete_item(request, id):
-  item = (Item.objects.get(id=id))
+  item = (Item.objects.get(pk=id))
   item.delete()
   return redirect('main:show_main')
 
@@ -128,3 +128,10 @@ def add_item_ajax(request):
     return HttpResponse(b"CREATED", STATUS=201)
   
   return HttpResponseNotFound()
+
+def delete_item_ajax(request, id):
+  item = (Item.objects.get(pk=id))
+  item.delete()
+  return HttpResponse(b"DELETED", STATUS=201)
+
+    
