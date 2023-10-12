@@ -18,34 +18,12 @@
   <p>{{ description }}</p>
   <br/>
 
-  <h2 class="text-lg text-bold">
+  <h2 id="itemCount" class="text-lg text-bold">
     Total items: {{ count }}
   </h2>
   <div id="cards" class="row">
     <!-- Use AJAX -->
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">${item.fields.name}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Tersisa ${item.fields.amount}</h6>
-        <p class="card-text">${item.fields.description}</p>
-        <p class="card-text">${item.fields.created_at}</p>
-        <a href="\{% url 'main:increment_counter' ${item.fields.id} %\}">
-          <button class="bg-gray-300 px-1 hover:bg-gray-400 transition-all duration-200 mt-2 mb-5">
-            ++
-          </button>
-        </a>
-        <a href="\{% url 'main:decrement_counter' ${item.fields.id} %\}">
-          <button class="bg-gray-300 px-1 hover:bg-gray-400 transition-all duration-200 mt-2 mb-5">
-            --
-          </button>
-        </a>
-        <button class="delete-button">
-          delete
-        </button>
-      </div>
-    </div>
   </div>
-
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -97,6 +75,7 @@
       const items = await getItems()
       console.log("first")
       let htmlString = ``
+      let htmlCount = `Total items: ${items.length}`
       items.forEach((item) => {
         htmlString += `\n<div class="card" style="width: 18rem;">
           <div class="card-body">
@@ -104,26 +83,25 @@
             <h6 class="card-subtitle mb-2 text-muted">Tersisa ${item.fields.amount}</h6>
             <p class="card-text">${item.fields.description}</p>
             <p class="card-text">${item.fields.created_at}</p>
-            <a href="\{% url 'main:increment_counter' ${item.fields.id} %\}">
-              <button class="bg-gray-300 px-1 hover:bg-gray-400 transition-all duration-200 mt-2 mb-5">
-                ++
-              </button>
-            </a>
-            <a href="\{% url 'main:decrement_counter' ${item.fields.id} %\}">
-              <button class="bg-gray-300 px-1 hover:bg-gray-400 transition-all duration-200 mt-2 mb-5">
-                --
-              </button>
-            </a>
-            <button data-item-id=${item.fields.id} class="delete-button bg-gray-300 px-1 hover:bg-gray-400 transition-all duration-200 mt-2 mb-5">
+            <button onclick="incItem(${item.pk})" class="bg-gray-300 px-1 hover:bg-gray-400 transition-all duration-200 mt-2 mb-5">
+              ++
+            </button>
+            <button onclick="decItem(${item.pk})" class="bg-gray-300 px-1 hover:bg-gray-400 transition-all duration-200 mt-2 mb-5">
+              --
+            </button>
+            <button onclick="delItem(${item.pk})" class="bg-gray-300 px-1 hover:bg-gray-400 transition-all duration-200 mt-2 mb-5">
               delete
             </button>
           </div>
         </div>`
       })
-
+      document.getElementById("itemCount").innerHTML = htmlCount
       document.getElementById("cards").innerHTML = htmlString
     }
-    
+
+    document.addEventListener('DOMContentLoaded', function () {
+      refreshItems()
+    })
 
     function addItem() {
       fetch("{% url 'main:add_item_ajax' %}", {
@@ -134,26 +112,37 @@
       document.getElementById("form").reset()
       return false
     }
-    console.log(document)
-
-    document.addEventListener('DOMContentLoaded', function () {
-      refreshItems()
-    })
     
-    document.addEventListener('DOMContentLoaded', function () {
-      const deleteButtons = document.querySelectorAll('.delete-button');
-      console.log(deleteButtons)
-      deleteButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          console.log("CLICKED")
-          const id = this.getAttribute('data-item-id')
-          console.log(id)
-          fetch(`/delete_item_ajax/${id}`).then(refreshItems)
-        })
-      })
-    })
-    document.getElementById("button_add").onclick = addItem
-    document.getElementById("button_delete").onclick = deleteItem
+    function incItem(id) {
+      const formData = new FormData()
+      formData.append("id", id)
+      fetch("{% url 'main:increase_item_ajax' %}", {
+        method: "POST",
+        body: formData
+      }).then(refreshItems)
+      return false
+    }
 
+    function decItem(id) {
+      const formData = new FormData()
+      formData.append("id", id)
+      fetch("{% url 'main:decrease_item_ajax' %}", {
+        method: "POST",
+        body: formData
+      }).then(refreshItems)
+      return false
+    }
+
+    function delItem(id) {
+      const formData = new FormData()
+      formData.append("id", id)
+      fetch("{% url 'main:delete_item_ajax' %}", {
+        method: "POST",
+        body: formData
+      }).then(refreshItems)
+      return false
+    }
+    
+    document.getElementById("button_add").onclick = addItem
   </script>
 {% endblock content %}

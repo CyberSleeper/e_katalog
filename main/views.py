@@ -16,7 +16,8 @@ from main.models import Item
 @login_required(login_url='/login')
 def show_main(request):
   items = Item.objects.filter(user=request.user)
-  count = Item.objects.filter(user=request.user).count()
+  
+  count = items.count()
 
   context = {
     'nama_mahasiswa': 'Mahartha Gemilang',
@@ -129,9 +130,33 @@ def add_item_ajax(request):
   
   return HttpResponseNotFound()
 
-def delete_item_ajax(request, id):
-  item = (Item.objects.get(pk=id))
-  item.delete()
-  return HttpResponse(b"DELETED", STATUS=201)
+@csrf_exempt
+def increase_item_ajax(request):
+  print("BERHASILL")
+  if request.method == 'POST':
+    id = request.POST.get("id")
+    updated = Item.objects.get(pk=id)
+    updated.amount += 1
+    updated.save()
+    return HttpResponse(b"UPDATED", status=201)
+  return HttpResponseNotFound()
 
-    
+@csrf_exempt
+def decrease_item_ajax(request):
+  if request.method == 'POST':
+    id = request.POST.get("id")
+    updated = Item.objects.get(pk=id)
+    if updated.amount > 0:
+      updated.amount -= 1
+    updated.save()
+    return HttpResponse(b"UPDATED", status=201)
+  return HttpResponseNotFound()
+
+@csrf_exempt
+def delete_item_ajax(request):
+  if request.method == 'POST':
+    id = request.POST.get("id")
+    item = (Item.objects.get(pk=id))
+    item.delete()
+    return HttpResponse(b"DELETED", STATUS=201)
+  return HttpResponseNotFound()
