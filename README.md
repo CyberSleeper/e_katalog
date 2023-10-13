@@ -9,6 +9,7 @@ This is my weekly assignment for Platform Based Programming lecture.
 - [Week 03](#week-03)
 - [Week 04](#week-04)
 - [Week 05](#week-05)
+- [Week 06](#week-06)
 
 ## Week 02
 
@@ -368,3 +369,65 @@ Bootstrap has been available since a long time ago while, but in most cases Tail
     }
     </style>
     ```
+## Week 06
+
+### Scope
+- [Explain the difference between asynchronous programming and synchronous programming.](#explain-the-difference-between-asynchronous-programming-and-synchronous-programming)
+- [In the implementation of JavaScript and AJAX, there is an implemented paradigm called the event-driven programming paradigm. Explain what this paradigm means and give one example of its implementation in this assignment.](#what-is-the-event-driven-programming-paradigm-and-give-example)
+- [Explain the implementation of asynchronous programming in AJAX.](#explain-the-implementation-of-asynchronous-programming-in-ajax)
+- [In this semester, the implementation of AJAX is done using the Fetch API rather than the jQuery library. Compare the two technologies and write down your opinion which technology is better to use.](#compare-the-tech-of-ajax-using-fetch-api-and-jquery-library)
+- [Explain how you implemented the checklist above step-by-step (not just following the tutorial).](#explain-how-you-implemented-the-checklist-above-step-by-step)
+
+### Explain the difference between asynchronous programming and synchronous programming.
+Asynchronous programming typically used in development environment. Async does not block further execution while one or more operations are in progress. Meanwhile sync programming works step-by-step without skipping any procedure.
+
+### What is the event-driven programming paradigm and give example.
+Event-driven programming in JavaScript and AJAX revolves around responding to user-triggered events, like button clicks. These events prompt specific actions, such as fetching, updating data, and displaying data. Here is the example.
+```html
+<button type="button" id="button_add">Add Product</button>
+
+<script>
+    function addItem() {
+        fetch("{% url 'main:add_item_ajax' %}", {
+        method: "POST",
+        body: new FormData(document.querySelector('#form'))
+        }).then()
+
+        document.getElementById("form").reset()
+        return false
+    }
+
+    document.getElementById("button_add").onclick = addItem
+</script>
+```
+
+### Explain the implementation of asynchronous programming in AJAX.
+AJAX is Asynchronous JavaScript And XML. It allows us to send and receive data without requiring the page to refresh. The implementation of async in AJAX is using `async` on the asyncronous function and `await` for waiting the response of an async.
+
+### Compare the tech of AJAX using Fetch API and JQuery library
+Fetch API and JQuery are both used for making async request and handling data in web app. Obviously each tech stack has its own benefits.
+
+#### Fetch API
+- Modern Standard<br>
+Fetch API is the current web standard.
+
+- Flexibility<br>
+Fetch is highly flexible allowing us to use JSON, XML, and more.
+
+- Integrated with Many Other Tech Stack<br>
+Fetch API is integrated well with, as instance, JavaScript.
+
+#### JQuery
+- Compatibility<br>
+JQuery has been around since a long time ago. It is compatible with older browsers.
+
+- Plugin Ecosystem<br>
+JQuery has rich ecosystem of plugin that simplify many complex tasks.
+
+### Explain how you implemented the checklist above step-by-step
+1. Change the table into cards
+2. Implement AJAX GET to fetch items data.
+3. Implement modal for add item.
+4. Implement update amount (increase and decrease) using AJAX.
+5. Implement delete item using AJAX.
+6. Do `python manage.py collectstatic` and deploy.
