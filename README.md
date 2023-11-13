@@ -368,7 +368,7 @@ Bootstrap has been available since a long time ago while, but in most cases Tail
         background: rgb(250, 194, 194);
     }
     </style>
-    ```
+    ``` 
 ## Week 06
 
 ### Scope
