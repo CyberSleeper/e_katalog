@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -46,3 +47,14 @@ def logout(request):
         "status": False,
         "message": "Logout gagal."
         }, status=401)
+    
+@csrf_exempt
+def register(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = User.objects.create_user(username=username, password=password)
+    user.save()
+    return JsonResponse({
+        "status": True,
+        "message": "Registration successful!"
+    }, status=200)
